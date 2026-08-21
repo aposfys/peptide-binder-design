@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pepdesign"
+version = "0.1.0"
+description = "De novo peptide binder design with non-circular evaluation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Apostolos Fysekidis" }]
+keywords = ["protein-design", "rfdiffusion", "proteinmpnn", "peptide", "binder", "boltz"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = ["numpy>=1.24", "requests>=2.31"]
+
+[project.optional-dependencies]
+bio = ["biopython>=1.80"]
+design = ["torch>=2.2"]
+folding = ["boltz>=2.0"]
+figures = ["matplotlib>=3.7"]
+dev = ["pytest>=7.0", "numpy>=1.24", "ruff>=0.6", "mypy>=1.11"]
+
+[project.scripts]
+pepdesign = "pepdesign.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 95
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
+ignore = ["E501", "B008", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011", "SIM117"]
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+check_untyped_defs = true
+exclude = ["^tests/"]
