@@ -1,0 +1,77 @@
+{
+ "filter": "ESM-2 pseudo-log-likelihood, length-normalised",
+ "not_run": "self-consistency RMSD, interface pTM and predicted aligned error: all need a structure predictor on a GPU. No structure-based numbers are reported.",
+ "populations": {
+  "composition_matched": {
+   "n": 120,
+   "mean": -3.0507,
+   "median": -3.0444
+  },
+  "length_matched": {
+   "n": 120,
+   "mean": -3.026,
+   "median": -3.0377
+  },
+  "real": {
+   "n": 120,
+   "mean": -2.8038,
+   "median": -2.9598
+  },
+  "scrambled": {
+   "n": 120,
+   "mean": -2.8759,
+   "median": -3.0064
+  }
+ },
+ "separations": [
+  {
+   "control_kind": "composition_matched",
+   "n_real": 120,
+   "n_control": 120,
+   "mean_real": -2.8038,
+   "mean_control": -3.0507,
+   "auc": 0.6632,
+   "auc_ci_low": 0.5922,
+   "auc_ci_high": 0.7303,
+   "effect_size": 0.5991,
+   "threshold_at_5pct_control": -2.7931,
+   "real_recall_at_threshold": 0.275
+  },
+  {
+   "control_kind": "length_matched",
+   "n_real": 120,
+   "n_control": 120,
+   "mean_real": -2.8038,
+   "mean_control": -3.026,
+   "auc": 0.6322,
+   "auc_ci_low": 0.5541,
+   "auc_ci_high": 0.7035,
+   "effect_size": 0.5379,
+   "threshold_at_5pct_control": -2.7312,
+   "real_recall_at_threshold": 0.25
+  },
+  {
+   "control_kind": "scrambled",
+   "n_real": 120,
+   "n_control": 120,
+   "mean_real": -2.8038,
+   "mean_control": -2.8759,
+   "auc": 0.5467,
+   "auc_ci_low": 0.4711,
+   "auc_ci_high": 0.6144,
+   "effect_size": 0.1371,
+   "threshold_at_5pct_control": -2.2219,
+   "real_recall_at_threshold": 0.075
+  }
+ ],
+ "notes": {
+  "peptide_source": "RCSB short chains in complexes",
+  "dropped": {
+   "too_short": 125,
+   "too_long": 7,
+   "non_standard": 47,
+   "duplicate": 131
+  },
+  "n_peptides": 120
+ }
+}
