@@ -51,3 +51,23 @@ the finding.
 - **Peptides are not small proteins.** Short, flexible binders are exactly where structure
   predictors are least reliable, and confidence metrics calibrated on globular domains do
   not transfer. Confidence is recalibrated on peptide-length controls.
+
+## Layout
+
+```
+src/pepdesign/
+  targets.py    RCSB peptide retrieval, filtering, deduplication
+  controls.py   scrambled, composition-matched and length-matched nulls
+  score.py      exact ESM-2 pseudo-log-likelihood, length-normalised
+  filters.py    the structure-based stack and its no-shared-model guard (unrun)
+  evaluate.py   AUC with bootstrap CI, effect size, threshold from the null
+  cli.py        `python -m pepdesign.cli`
+```
+
+26 tests, none needing a model or a network.
+
+`controls` and `evaluate` are CPU-only and reachable; `targets` and `generate`
+name the GPU as the reason they are unimplemented. `controls` was previously
+refused with a GPU message despite being implemented — a reachable command hidden
+behind a gate it did not need. `analysis` refuses to overwrite findings from a
+larger peptide set unless passed `--force`.
