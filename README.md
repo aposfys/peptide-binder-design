@@ -28,11 +28,16 @@ None of this is a criticism of ESM. Composition-matched and length-matched contr
 
 ```
 make install
-python3 -m pepdesign.cli analysis      # peptides, controls, scoring, separation
+pepdesign analysis     # peptides, controls, scoring, separation
+pepdesign controls     # write the control sets and their composition distance
+pepdesign evaluate     # print the separation table from an existing run
 make test
 ```
 
-The generation and structure-scoring subcommands remain unimplemented and say so.
+`targets` and `generate` remain unimplemented and name the GPU as the reason. `controls`
+and `evaluate` are CPU-only and reachable — `controls` was previously refused with a GPU
+message despite being implemented. `analysis` refuses to overwrite findings from a larger
+peptide set unless passed `--force`.
 
 ### What the peptide set is
 
@@ -50,9 +55,10 @@ src/pepdesign/
   cli.py        `python -m pepdesign.cli`
 ```
 
-20 tests, none needing a model or a network.
+26 tests, none needing a model or a network.
 
 ### More
 
+- [Analysis: what was done, and why it was done that way](ANALYSIS.md)
 - [Full results and limitations](results/RESULTS.md)
 - [The circularity problem stated in full, and the traps this pipeline avoids](docs/DESIGN.md)
