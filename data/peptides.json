@@ -1,0 +1,963 @@
+{
+ "source": "RCSB PDB: protein entities < 3.5 kDa in structures with >1 protein entity",
+ "requested": 500,
+ "kept": 190,
+ "dropped": {
+  "too_short": 125,
+  "too_long": 7,
+  "non_standard": 47,
+  "duplicate": 131
+ },
+ "peptides": [
+  {
+   "entity_id": "12QB_3",
+   "sequence": "KKGLINTEIDFDPIPNTKK",
+   "description": "GP2 peptide"
+  },
+  {
+   "entity_id": "1A3J_1",
+   "sequence": "PPGPPGPPG",
+   "description": "COLLAGEN-LIKE PEPTIDE"
+  },
+  {
+   "entity_id": "1A3E_3",
+   "sequence": "GGQSHNDGDFEEIPEEYL",
+   "description": "Hirudin"
+  },
+  {
+   "entity_id": "1A38_2",
+   "sequence": "FHCVPRDLSWLDLEANMCLP",
+   "description": "R18 PEPTIDE (PHCVPRDLSWLDLEANMCLP)"
+  },
+  {
+   "entity_id": "1A37_2",
+   "sequence": "KSQRQRSTSTPNVHM",
+   "description": "PS-RAF259 PEPTIDE LSQRQRST(SEP)TPNVHM"
+  },
+  {
+   "entity_id": "1A2C_3",
+   "sequence": "NGDFEEIPEEYL",
+   "description": "Hirudin variant-2"
+  },
+  {
+   "entity_id": "1A1R_2",
+   "sequence": "KKGSVVIVGRIVLSGKPAIIPKK",
+   "description": "NS4A PROTEIN"
+  },
+  {
+   "entity_id": "1A1O_3",
+   "sequence": "KPIVQYDNF",
+   "description": "PEPTIDE LS6 (KPIVQYDNF)"
+  },
+  {
+   "entity_id": "1A1N_3",
+   "sequence": "VPLRPMTY",
+   "description": "PEPTIDE VPLRPMTY"
+  },
+  {
+   "entity_id": "1A1M_3",
+   "sequence": "TPYDINQML",
+   "description": "PEPTIDE TPYDINQML"
+  },
+  {
+   "entity_id": "1A0N_1",
+   "sequence": "PPRPLPVAPGSSKT",
+   "description": "PRO-PRO-ARG-PRO-LEU-PRO-VAL-ALA-PRO-GLY-SER-SER-LYS-THR"
+  },
+  {
+   "entity_id": "12ZJ_2",
+   "sequence": "SAWEGPSTSRALG",
+   "description": "MAGE-like protein 2"
+  },
+  {
+   "entity_id": "12QA_3",
+   "sequence": "GLINTEIDFDPIPNT",
+   "description": "GP2 peptide"
+  },
+  {
+   "entity_id": "12LP_3",
+   "sequence": "PRCALVKSK",
+   "description": "SNAG peptide"
+  },
+  {
+   "entity_id": "11SJ_2",
+   "sequence": "KYYITGEAEGFPATV",
+   "description": "Estrogen receptor"
+  },
+  {
+   "entity_id": "11MH_3",
+   "sequence": "YICIWQDWGAHRCIKK",
+   "description": "Compstatin Cp60"
+  },
+  {
+   "entity_id": "10TC_2",
+   "sequence": "EVNVTSVY",
+   "description": "RbBP5"
+  },
+  {
+   "entity_id": "10PX_52",
+   "sequence": "MGKGDRRTRRGKIWRGTYGKYRPRKKK",
+   "description": "30S ribosomal protein Thx"
+  },
+  {
+   "entity_id": "10LG_2",
+   "sequence": "SLTDDLWRAMMEAWMRL",
+   "description": "Rgg3bp13 peptide"
+  },
+  {
+   "entity_id": "1ABI_3",
+   "sequence": "FPRGGGGGNGDFEEIPEEYL",
+   "description": "HIRULOG 3"
+  },
+  {
+   "entity_id": "1ABO_2",
+   "sequence": "APTMPPPLPP",
+   "description": "3BP-1 SYNTHETIC PEPTIDE, 10 RESIDUES"
+  },
+  {
+   "entity_id": "1AD8_3",
+   "sequence": "DFEEIPEEYL",
+   "description": "HIRUDIN (53-65) PEPTIDE"
+  },
+  {
+   "entity_id": "1AI8_3",
+   "sequence": "NEDFEEIPEEYL",
+   "description": "HIRUDIN IIIB"
+  },
+  {
+   "entity_id": "1APM_2",
+   "sequence": "TTYADFIASGRTGRRNAIHD",
+   "description": "PEPTIDE INHIBITOR PKI(5-24)"
+  },
+  {
+   "entity_id": "1APH_2",
+   "sequence": "FVNQHLCGSHLVEALYLVCGERGFFYTPKA",
+   "description": "INSULIN B CHAIN (PH 7)"
+  },
+  {
+   "entity_id": "1APH_1",
+   "sequence": "GIVEQCCASVCSLYQLENYCN",
+   "description": "INSULIN A CHAIN (PH 7)"
+  },
+  {
+   "entity_id": "1AOU_2",
+   "sequence": "EPQYEEIPIYL",
+   "description": "PHOSPHOTYROSYL PEPTIDE"
+  },
+  {
+   "entity_id": "1AO7_3",
+   "sequence": "LLFGYPVYV",
+   "description": "TAX PEPTIDE"
+  },
+  {
+   "entity_id": "1AKJ_3",
+   "sequence": "ILKEPVHGV",
+   "description": "HIV REVERSE TRANSCRIPTASE EPITOPE"
+  },
+  {
+   "entity_id": "1AIY_2",
+   "sequence": "FVNQHLCGSHLVEALYLVCGERGFFYTPKT",
+   "description": "R6 INSULIN HEXAMER"
+  },
+  {
+   "entity_id": "1AIY_1",
+   "sequence": "GIVEQCCTSICSLYQLENYCN",
+   "description": "R6 INSULIN HEXAMER"
+  },
+  {
+   "entity_id": "1AI1_3",
+   "sequence": "YNKRKRIHIGPGRAFYTTKNIIGC",
+   "description": "AIB142"
+  },
+  {
+   "entity_id": "1AGF_3",
+   "sequence": "GGKKRYKL",
+   "description": "HIV-1 GAG PEPTIDE (GGKKRYKL - 5R MUTATION)"
+  },
+  {
+   "entity_id": "1AGE_3",
+   "sequence": "GGKKKYRL",
+   "description": "HIV-1 GAG PEPTIDE (GGKKKYRL - 7R MUTATION)"
+  },
+  {
+   "entity_id": "1AGD_3",
+   "sequence": "GGKKKYKL",
+   "description": "HIV-1 GAG PEPTIDE (GGKKKYKL - INDEX PEPTIDE)"
+  },
+  {
+   "entity_id": "1AGC_3",
+   "sequence": "GGKKKYQL",
+   "description": "HIV-1 GAG PEPTIDE (GGKKKYQL - 7Q MUTATION)"
+  },
+  {
+   "entity_id": "1AGB_3",
+   "sequence": "GGRKKYKL",
+   "description": "HIV-1 GAG PEPTIDE (GGRKKYKL - 3R MUTATION)"
+  },
+  {
+   "entity_id": "1AFQ_1",
+   "sequence": "CGVPAIQPVLSGL",
+   "description": "BOVINE GAMMA-CHYMOTRYPSIN"
+  },
+  {
+   "entity_id": "1ABT_2",
+   "sequence": "KHWVYYTCCPDT",
+   "description": "NICOTINIC RECEPTOR PEPTIDE"
+  },
+  {
+   "entity_id": "1A9E_3",
+   "sequence": "LPPLDITPY",
+   "description": "PEPTIDE LPPLDITPY"
+  },
+  {
+   "entity_id": "1A81_2",
+   "sequence": "PDYEPIRKGQRDLYSGLN",
+   "description": "T-CELL SURFACE GLYCOPROTEIN CD3 EPSILON CHAIN"
+  },
+  {
+   "entity_id": "1A7F_2",
+   "sequence": "FVNQHLCGSHLVEALELVCGERGGFYTPK",
+   "description": "INSULIN"
+  },
+  {
+   "entity_id": "1A6A_3",
+   "sequence": "PVSKMRMATPLLMQA",
+   "description": "HLA class II histocompatibility antigen, gamma chain"
+  },
+  {
+   "entity_id": "1AYA_2",
+   "sequence": "SVLYTAVQPNE",
+   "description": "PEPTIDE PDGFR-1009"
+  },
+  {
+   "entity_id": "1AYB_2",
+   "sequence": "SPGEYVNIEFGS",
+   "description": "PEPTIDE IRS-1-895"
+  },
+  {
+   "entity_id": "1AYC_2",
+   "sequence": "DGGYMDMSKGS",
+   "description": "PEPTIDE PDGFR-740"
+  },
+  {
+   "entity_id": "1B0G_3",
+   "sequence": "ALWGFFPVL",
+   "description": "PEPTIDE P1049 (ALWGFFPVL)"
+  },
+  {
+   "entity_id": "1B07_2",
+   "sequence": "YEVPGPVPPRRR",
+   "description": "PROTEIN (SH3 PEPTOID INHIBITOR)"
+  },
+  {
+   "entity_id": "1AZE_2",
+   "sequence": "VPPPVPPRRR",
+   "description": "SOS"
+  },
+  {
+   "entity_id": "1AXC_2",
+   "sequence": "GRKRRQTSMTDFYHSKRRLIFS",
+   "description": "P21/WAF1"
+  },
+  {
+   "entity_id": "1AWI_2",
+   "sequence": "PPPPPPPPPP",
+   "description": "L-PRO10"
+  },
+  {
+   "entity_id": "1AW8_1",
+   "sequence": "MIRTMLQGKLHRVKVTHADLHYEG",
+   "description": "L-ASPARTATE-ALPHA-DECARBOXYLASE"
+  },
+  {
+   "entity_id": "1AVP_2",
+   "sequence": "GVQSLKRRRCF",
+   "description": "ADENOVIRAL PROTEINASE"
+  },
+  {
+   "entity_id": "1AVF_1",
+   "sequence": "AVVKVPLKKFKSIRETMKEKGLLGEF",
+   "description": "GASTRICSIN"
+  },
+  {
+   "entity_id": "1AR8_1",
+   "sequence": "AAAASSST",
+   "description": "P1/MAHONEY POLIOVIRUS"
+  },
+  {
+   "entity_id": "1AQD_3",
+   "sequence": "VGSDWRFLRGYHQYA",
+   "description": "HLA-A2"
+  },
+  {
+   "entity_id": "1AQC_2",
+   "sequence": "GYENPTYKFF",
+   "description": "PEPTIDE"
+  },
+  {
+   "entity_id": "1BHX_1",
+   "sequence": "SGEADCGLRPLFEKKSLEDKTERELLESYI",
+   "description": "ALPHA THROMBIN"
+  },
+  {
+   "entity_id": "1BCU_3",
+   "sequence": "GDFEEIPEEYLQ",
+   "description": "HIRUGEN"
+  },
+  {
+   "entity_id": "1BCK_2",
+   "sequence": "ALLVTTGLVLA",
+   "description": "CYCLOSPORIN C"
+  },
+  {
+   "entity_id": "1B9E_2",
+   "sequence": "FVNQHLCGEHLVEALYLVCGERGFFYTPKT",
+   "description": "PROTEIN (INSULIN)"
+  },
+  {
+   "entity_id": "1B8H_2",
+   "sequence": "KKASLFDMFDF",
+   "description": "DNA POLYMERASE fragment"
+  },
+  {
+   "entity_id": "1C9I_2",
+   "sequence": "AVSLLDLDA",
+   "description": "B-ADAPTIN 3"
+  },
+  {
+   "entity_id": "1C5Z_1",
+   "sequence": "KPSSPPEELKFQCGQKTLRPRFK",
+   "description": "PROTEIN (UROKINASE-TYPE PLASMINOGEN ACTIVATOR)"
+  },
+  {
+   "entity_id": "1C5O_3",
+   "sequence": "DFEEIPEEYLQ",
+   "description": "Hirudin"
+  },
+  {
+   "entity_id": "1C5F_2",
+   "sequence": "ALLVTAGLVLA",
+   "description": "CYCLOSPORIN A"
+  },
+  {
+   "entity_id": "1C4Y_3",
+   "sequence": "ENEDFEGIPGEYL",
+   "description": "HIRUGEN"
+  },
+  {
+   "entity_id": "1C4V_3",
+   "sequence": "ACENEDFEEIPGEYL",
+   "description": "HIRUGEN"
+  },
+  {
+   "entity_id": "1C4U_3",
+   "sequence": "ACENEDFEGIPGEY",
+   "description": "PROTEIN (HIRUGEN)"
+  },
+  {
+   "entity_id": "1BZV_2",
+   "sequence": "FVNQHLCGSHLVEALYLVCGERGFFA",
+   "description": "INSULIN"
+  },
+  {
+   "entity_id": "1BZ9_3",
+   "sequence": "FAPGVFPYM",
+   "description": "PROTEIN (PEPTIDE P1027 (FAPGVFPYM))"
+  },
+  {
+   "entity_id": "1BXP_2",
+   "sequence": "MRYYESSLKSYPD",
+   "description": "PEPTIDE MET-ARG-TYR-TYR-GLU-SER-SER-LEU-LYS-SER-TYR-PRO-ASP"
+  },
+  {
+   "entity_id": "1BXL_2",
+   "sequence": "GQVGRQLAIIGDDINR",
+   "description": "BAK PEPTIDE"
+  },
+  {
+   "entity_id": "1BX2_3",
+   "sequence": "ENPVVHFFKNIVTPR",
+   "description": "PROTEIN (HLA-DR2)"
+  },
+  {
+   "entity_id": "1BSX_2",
+   "sequence": "GHKILHRLLQDSS",
+   "description": "PROTEIN (GRIP1)"
+  },
+  {
+   "entity_id": "1BR8_2",
+   "sequence": "SEAAASTAVVIA",
+   "description": "PROTEIN (PEPTIDE)"
+  },
+  {
+   "entity_id": "1BQH_3",
+   "sequence": "RGYVYQGL",
+   "description": "PROTEIN (VSV8)"
+  },
+  {
+   "entity_id": "1BON_2",
+   "sequence": "QQPQAVHTYCGRHLARTLADLCWEAGVD",
+   "description": "BOMBYXIN-II,BOMBYXIN A-6"
+  },
+  {
+   "entity_id": "1BON_1",
+   "sequence": "GIVDECCLRPCSVDVLLSYC",
+   "description": "BOMBYXIN-II,BOMBYXIN A-2"
+  },
+  {
+   "entity_id": "1BOG_3",
+   "sequence": "GATPEDLNQKL",
+   "description": "PEPTIDE"
+  },
+  {
+   "entity_id": "1BMB_2",
+   "sequence": "KPFYVNVEF",
+   "description": "PROTEIN (PKF270-974)"
+  },
+  {
+   "entity_id": "1BJR_2",
+   "sequence": "VAQGGAAGLA",
+   "description": "LACTOFERRIN"
+  },
+  {
+   "entity_id": "1BII_3",
+   "sequence": "RGPGRAFVTI",
+   "description": "DECAMERIC PEPTIDE"
+  },
+  {
+   "entity_id": "1BI6_1",
+   "sequence": "TACSECVCPLR",
+   "description": "BROMELAIN INHIBITOR VI"
+  },
+  {
+   "entity_id": "1CWH_2",
+   "sequence": "ALLVTASLVLA",
+   "description": "CYCLOSPORIN A"
+  },
+  {
+   "entity_id": "1CWF_2",
+   "sequence": "ALLVTVGLVLA",
+   "description": "CYCLOSPORIN D"
+  },
+  {
+   "entity_id": "1CWD_2",
+   "sequence": "PEGDFEEVL",
+   "description": "(PHOSPHONOMETHYL)PHENYLALANINE-CONTAINING PEPTIDE PRO-GLU-GLY-ASP-PM3-GLU-GLU-VAL-LEU"
+  },
+  {
+   "entity_id": "1CVU_2",
+   "sequence": "TKTATINAS",
+   "description": "PROTEIN (9-MER)"
+  },
+  {
+   "entity_id": "1CU4_3",
+   "sequence": "APKTNMKHMA",
+   "description": "RECOGNITION PEPTIDE"
+  },
+  {
+   "entity_id": "1CQH_2",
+   "sequence": "PATLKICSWNVDG",
+   "description": "REF-1 PEPTIDE"
+  },
+  {
+   "entity_id": "1CQ4_2",
+   "sequence": "EYRIDRVRLFVDKLDNIAQVPRVG",
+   "description": "PROTEIN (SERINE PROTEINASE INHIBITOR 2)"
+  },
+  {
+   "entity_id": "1CN3_2",
+   "sequence": "GGGGGGGGAASHQRVTPDWMLPLILGLYG",
+   "description": "FRAGMENT OF COAT PROTEIN VP2"
+  },
+  {
+   "entity_id": "1CMK_2",
+   "sequence": "TTYADFIASGRTGRRNAIHDIL",
+   "description": "cAMP-dependent protein kinase inhibitor, alpha form"
+  },
+  {
+   "entity_id": "1CMI_2",
+   "sequence": "KAEMKDTGIQVDR",
+   "description": "Nitric oxide synthase 1"
+  },
+  {
+   "entity_id": "1CM4_2",
+   "sequence": "LKKFNARRKLKGAILTTMLATRNFS",
+   "description": "CALMODULIN-DEPENDENT PROTEIN KINASE II-ALPHA"
+  },
+  {
+   "entity_id": "1CKK_2",
+   "sequence": "VKLIPSWTTVILVKSMLRKRSFGNPF",
+   "description": "Calcium/calmodulin-dependent protein kinase kinase 1"
+  },
+  {
+   "entity_id": "1CKB_2",
+   "sequence": "PPPVPPRRRR",
+   "description": "SOS PEPTIDE (PRO-PRO-PRO-VAL-PRO-PRO-ARG-ARG-ARG-ARG)"
+  },
+  {
+   "entity_id": "1CKA_2",
+   "sequence": "PPPALPPKKR",
+   "description": "C3G PEPTIDE (PRO-PRO-PRO-ALA-LEU-PRO-PRO-LYS-LYS-ARG)"
+  },
+  {
+   "entity_id": "1CJR_1",
+   "sequence": "KETAAAKFERQHMDS",
+   "description": "PROTEIN (RIBONUCLEASE S)"
+  },
+  {
+   "entity_id": "1CJF_2",
+   "sequence": "PPPPPPPPPPPPPPP",
+   "description": "PROTEIN (PROLINE PEPTIDE)"
+  },
+  {
+   "entity_id": "1CFS_3",
+   "sequence": "GLYEWGGARIT",
+   "description": "PROTEIN (ANTIGEN BOUND PEPTIDE)"
+  },
+  {
+   "entity_id": "1CFN_3",
+   "sequence": "GATPQDLNTL",
+   "description": "PROTEIN (BOUND PEPTIDE)"
+  },
+  {
+   "entity_id": "1CFF_2",
+   "sequence": "LRRGQILWFRGLNRIQTQIK",
+   "description": "CALCIUM PUMP"
+  },
+  {
+   "entity_id": "1CF0_2",
+   "sequence": "PPPPPPPPY",
+   "description": "PROTEIN (L-PRO10-IODOTYROSINE)"
+  },
+  {
+   "entity_id": "1CE6_3",
+   "sequence": "FAPGNYPAL",
+   "description": "PROTEIN (SENDAI VIRUS NUCLEOPROTEIN)"
+  },
+  {
+   "entity_id": "1CE1_3",
+   "sequence": "GTSSPSAD",
+   "description": "PROTEIN (PEPTIDE ANTIGEN)"
+  },
+  {
+   "entity_id": "1CDL_2",
+   "sequence": "ARRKWQKTGHAVRAIGRLSS",
+   "description": "CALCIUM/CALMODULIN-DEPENDENT PROTEIN KINASE TYPE II ALPHA CHAIN"
+  },
+  {
+   "entity_id": "1CA9_2",
+   "sequence": "GQVPFSKEEC",
+   "description": "PROTEIN (TNF-R2)"
+  },
+  {
+   "entity_id": "1C9L_2",
+   "sequence": "DTNLIEFE",
+   "description": "B-ADAPTIN 3"
+  },
+  {
+   "entity_id": "1D8D_3",
+   "sequence": "KKKSKTKCVIM",
+   "description": "K-RAS4B PEPTIDE SUBSTRATE"
+  },
+  {
+   "entity_id": "1DKD_2",
+   "sequence": "SWMTTPWGFLHP",
+   "description": "12-MER PEPTIDE"
+  },
+  {
+   "entity_id": "1DEI_2",
+   "sequence": "FVNQHLCGSHLVEALYLVCGERG",
+   "description": "INSULIN"
+  },
+  {
+   "entity_id": "1DDM_2",
+   "sequence": "GFSNMSFEDFP",
+   "description": "NUMB ASSOCIATE KINASE"
+  },
+  {
+   "entity_id": "1D9K_5",
+   "sequence": "GNSHRGAIEWEGIESG",
+   "description": "CONALBUMIN PEPTIDE"
+  },
+  {
+   "entity_id": "1D7Q_1",
+   "sequence": "MRGSHHHHHHTDPM",
+   "description": "PROTEIN (N-TERMINAL HISTIDINE TAG)"
+  },
+  {
+   "entity_id": "1D5H_1",
+   "sequence": "KETAAAKAERQHMDS",
+   "description": "S PEPTIDE"
+  },
+  {
+   "entity_id": "1D5G_2",
+   "sequence": "FADSEADENEQVSAV",
+   "description": "PEPTIDE FADSEADENEQVSAV"
+  },
+  {
+   "entity_id": "1D5E_1",
+   "sequence": "KETAAAKLERQHLDS",
+   "description": "S PEPTIDE"
+  },
+  {
+   "entity_id": "1D5D_1",
+   "sequence": "KETAAAKMERQHLDS",
+   "description": "S PEPTIDE"
+  },
+  {
+   "entity_id": "1D4W_2",
+   "sequence": "KSLTIYAQVQK",
+   "description": "SIGNALING LYMPHOCYTIC ACTIVATION MOLECULE"
+  },
+  {
+   "entity_id": "1D3D_1",
+   "sequence": "EADCGLRPLFEKKSLEDKTERELLESYI",
+   "description": "ALPHA-THROMBIN"
+  },
+  {
+   "entity_id": "1CYN_2",
+   "sequence": "SLLVTAGLVLA",
+   "description": "CYCLOSPORIN A"
+  },
+  {
+   "entity_id": "1CWO_2",
+   "sequence": "VLLVTTGLLLA",
+   "description": "CYCLOSPORIN C"
+  },
+  {
+   "entity_id": "1CWM_2",
+   "sequence": "ALLVTAGIVLA",
+   "description": "CYCLOSPORIN A"
+  },
+  {
+   "entity_id": "1CWI_2",
+   "sequence": "ALLVTVALVLA",
+   "description": "CYCLOSPORIN D"
+  },
+  {
+   "entity_id": "1DLH_3",
+   "sequence": "PKYVKQNTLKLAT",
+   "description": "ENTEROTOXIN TYPE B PRECURSOR"
+  },
+  {
+   "entity_id": "1DS5_2",
+   "sequence": "NQFVPRLYGFKIHPMAYQLQLQA",
+   "description": "CASEIN KINASE, BETA CHAIN"
+  },
+  {
+   "entity_id": "1EFX_3",
+   "sequence": "GAVDPLLAL",
+   "description": "PEPTIDE FROM IMPORTIN ALPHA-2"
+  },
+  {
+   "entity_id": "1EJ4_2",
+   "sequence": "RIIYDRKFLMECRN",
+   "description": "EUKARYOTIC TRANSLATION INITIATION FACTOR 4E BINDING PROTEIN 1"
+  },
+  {
+   "entity_id": "1EGP_2",
+   "sequence": "DLRYNRVRVFYNPGTNVVNHVPHVG",
+   "description": "EGLIN-C"
+  },
+  {
+   "entity_id": "1EG4_1",
+   "sequence": "KNMTPYRSPPPYVPP",
+   "description": "BETA-DYSTROGLYCAN"
+  },
+  {
+   "entity_id": "1EEZ_3",
+   "sequence": "ILSALVGIL",
+   "description": "GP2 PEPTIDE"
+  },
+  {
+   "entity_id": "1EEY_3",
+   "sequence": "ILSALVGIV",
+   "description": "GP2 PEPTIDE"
+  },
+  {
+   "entity_id": "1EE5_2",
+   "sequence": "AVKRPAATKKAGQAKKKKL",
+   "description": "NUCLEOPLASMIN"
+  },
+  {
+   "entity_id": "1EE4_2",
+   "sequence": "PAAKRVKLD",
+   "description": "MYC PROTO-ONCOGENE PROTEIN"
+  },
+  {
+   "entity_id": "1ED3_3",
+   "sequence": "ILFPSSERLISNR",
+   "description": "PEPTIDE MTF-E (13N3E)"
+  },
+  {
+   "entity_id": "1EBP_2",
+   "sequence": "GGTYSCHFGPLTWVCKPQGG",
+   "description": "EPO MIMETICS PEPTIDE 1"
+  },
+  {
+   "entity_id": "1EB1_3",
+   "sequence": "ADCGLRPLFEKKSLEDKTERELLESYI",
+   "description": "THROMBIN LIGHT CHAIN"
+  },
+  {
+   "entity_id": "1EB1_1",
+   "sequence": "DYEPIPEEAF",
+   "description": "PEPTIDE INHIBITOR"
+  },
+  {
+   "entity_id": "1EAK_2",
+   "sequence": "GPAGPPGA",
+   "description": "INHIBITOR PEPTIDE"
+  },
+  {
+   "entity_id": "1E91_2",
+   "sequence": "NIQMLLEAADYLE",
+   "description": "MAD PROTEIN (MAX DIMERIZER)"
+  },
+  {
+   "entity_id": "1E6I_2",
+   "sequence": "AKRHRKILRNSIQGI",
+   "description": "HISTONE H4"
+  },
+  {
+   "entity_id": "1E54_2",
+   "sequence": "DNWQNGTS",
+   "description": "OMP32"
+  },
+  {
+   "entity_id": "1E28_3",
+   "sequence": "TAFTIPSI",
+   "description": "PEPTIDE"
+  },
+  {
+   "entity_id": "1E27_3",
+   "sequence": "LPPVVAKEI",
+   "description": "HIV-1 PEPTIDE (LPPVVAKEI)"
+  },
+  {
+   "entity_id": "1DY9_2",
+   "sequence": "KGSVVIVGRIILSGRK",
+   "description": "NONSTRUCTURAL PROTEIN NS4A (P4)"
+  },
+  {
+   "entity_id": "1DUY_3",
+   "sequence": "LFGYPVYV",
+   "description": "HTLV-1 OCTAMERIC TAX PEPTIDE"
+  },
+  {
+   "entity_id": "1DT7_2",
+   "sequence": "SHLKSKKGQSTSRHKKLMFKTE",
+   "description": "CELLULAR TUMOR ANTIGEN P53"
+  },
+  {
+   "entity_id": "1DPU_2",
+   "sequence": "RIQRNKAAALLRLAAR",
+   "description": "URACIL DNA GLYCOSYLASE (UNG2)"
+  },
+  {
+   "entity_id": "1F58_3",
+   "sequence": "YNKRKRIHIGPGRAFYTTKNIIG",
+   "description": "Envelope glycoprotein gp120"
+  },
+  {
+   "entity_id": "1FG2_3",
+   "sequence": "KAVYNFATC",
+   "description": "LCMV PEPTIDIC EPITOPE GP33"
+  },
+  {
+   "entity_id": "1FFP_3",
+   "sequence": "SAVYNFATM",
+   "description": "SYNTHETIC PEPTIDE WITH SEQUENCE SER-ALA-VAL-TYR-ASN-PHE-ALA-THR-MET"
+  },
+  {
+   "entity_id": "1FFO_3",
+   "sequence": "AAVYNFATM",
+   "description": "PEPTIDE WITH SEQUENCE ALA-ALA-VAL-TYR-ASN-PHE-ALA-THR-MET"
+  },
+  {
+   "entity_id": "1FFN_3",
+   "sequence": "KAVYNFATM",
+   "description": "SYNTHETIC PEPTIDE WITH SEQUENCE LYS-ALA-VAL-TYR-ASN-PHE-ALA-THR-MET"
+  },
+  {
+   "entity_id": "1FF1_2",
+   "sequence": "PTGSSSTNPFL",
+   "description": "PTGSSSTNPFL PEPTIDE"
+  },
+  {
+   "entity_id": "1FEV_1",
+   "sequence": "KETAAAKFERQHLDS",
+   "description": "S PEPTIDE"
+  },
+  {
+   "entity_id": "1FBV_2",
+   "sequence": "SDGYTPEPA",
+   "description": "ZAP-70 PEPTIDE"
+  },
+  {
+   "entity_id": "1F96_2",
+   "sequence": "MKDTGIQVDRDLDGKSHK",
+   "description": "PROTEIN (NNOS, NEURONAL NITRIC OXIDE SYNTHASE)"
+  },
+  {
+   "entity_id": "1F95_2",
+   "sequence": "MSCDKSTQT",
+   "description": "BCL2-LIKE 11 (APOPTOSIS FACILITATOR)"
+  },
+  {
+   "entity_id": "1F90_3",
+   "sequence": "KPLEEVLNL",
+   "description": "ANTIGENIC NONAPEPTIDE"
+  },
+  {
+   "entity_id": "1F8H_2",
+   "sequence": "PTGSSSTNPFR",
+   "description": "PTGSSSTNPFR"
+  },
+  {
+   "entity_id": "1F7A_2",
+   "sequence": "KARVLAEAMS",
+   "description": "CA-P2 SUBSTRATE"
+  },
+  {
+   "entity_id": "1F4V_2",
+   "sequence": "MGDSILSQAEIDALLN",
+   "description": "FLAGELLAR MOTOR SWITCH PROTEIN"
+  },
+  {
+   "entity_id": "1F47_2",
+   "sequence": "KEPDYLDIPAFLRKQAD",
+   "description": "CELL DIVISION PROTEIN FTSZ"
+  },
+  {
+   "entity_id": "1F3R_1",
+   "sequence": "WNPGDYGGIL",
+   "description": "ACETYLCHOLINE RECEPTOR ALPHA"
+  },
+  {
+   "entity_id": "1F3J_3",
+   "sequence": "AMKRHGLDNYRGYS",
+   "description": "LYSOZYME C"
+  },
+  {
+   "entity_id": "1F2S_2",
+   "sequence": "RICPRIWMECKRDSDCMAECICVMGHCG",
+   "description": "TRYPSIN INHIBITOR A"
+  },
+  {
+   "entity_id": "1ER8_2",
+   "sequence": "HPFHLLVY",
+   "description": "H-77"
+  },
+  {
+   "entity_id": "1EPM_2",
+   "sequence": "TFQAFLRE",
+   "description": "PS2, THR-PHE-GLN-ALA-PSA-LEU-ARG-GLU"
+  },
+  {
+   "entity_id": "1EMU_2",
+   "sequence": "SEDDLLQECISSAMPK",
+   "description": "ADENOMATOUS POLYPOSIS COLI PROTEIN"
+  },
+  {
+   "entity_id": "1ELW_2",
+   "sequence": "GPTIEEVD",
+   "description": "HSC70-PEPTIDE"
+  },
+  {
+   "entity_id": "1EKB_1",
+   "sequence": "CGKKLVTQEVSPK",
+   "description": "ENTEROPEPTIDASE"
+  },
+  {
+   "entity_id": "1EJY_1",
+   "sequence": "KRPAATKKAGQAKKKK",
+   "description": "NUCLEOPLASMIN NLS PEPTIDE"
+  },
+  {
+   "entity_id": "1EJO_3",
+   "sequence": "YTTSTRGDLAHVTTT",
+   "description": "FMDV PEPTIDE"
+  },
+  {
+   "entity_id": "1EJH_2",
+   "sequence": "KQYDREFLLDFQFMPA",
+   "description": "EUKARYOTIC INITIATION FACTOR 4GII"
+  },
+  {
+   "entity_id": "1FLL_2",
+   "sequence": "KTAAPVQETLHGSQPVTQEDG",
+   "description": "B-CELL SURFACE ANTIGEN CD40"
+  },
+  {
+   "entity_id": "1G1H_2",
+   "sequence": "ETDYYRKGGKGLL",
+   "description": "BI-PHOSPHORYLATED PEPTIDE FROM THE INSULIN RECEPTOR KINASE"
+  },
+  {
+   "entity_id": "1G1F_2",
+   "sequence": "RDIYETDYYRK",
+   "description": "TRI-PHOSPHORYLATED PEPTIDE FROM THE INSULIN RECEPTOR KINASE"
+  },
+  {
+   "entity_id": "1G1E_1",
+   "sequence": "RMNIQMLLEAADYLER",
+   "description": "MAD1 PROTEIN"
+  },
+  {
+   "entity_id": "1G0Y_2",
+   "sequence": "ETPFTWEESNAYYWQPYALPL",
+   "description": "ANTAGONIST PEPTIDE AF10847"
+  },
+  {
+   "entity_id": "1FYN_2",
+   "sequence": "PPAYPPPPVP",
+   "description": "3BP-2"
+  },
+  {
+   "entity_id": "1FV1_3",
+   "sequence": "NPVVHFFKNIVTPRTPPPSQ",
+   "description": "MYELIN BASIC PROTEIN"
+  },
+  {
+   "entity_id": "1FU5_2",
+   "sequence": "EEEYMPMEDLYLDIL",
+   "description": "DOUBLY PHOSPHORYLATED MIDDLE T ANTIGEN"
+  },
+  {
+   "entity_id": "1FPT_1",
+   "sequence": "CVTIMTVDNPASTTNKDK",
+   "description": "FAB FRAGMENT OF AN NEUTRALIZING ANTIBODY FOR TYPE 1 POLIOVIRUS"
+  },
+  {
+   "entity_id": "1FPR_2",
+   "sequence": "EDTLTYADLD",
+   "description": "PEPTIDE PY469"
+  },
+  {
+   "entity_id": "1FO0_3",
+   "sequence": "INFDFNTI",
+   "description": "NATURALLY PROCESSED OCTAPEPTIDE PBM1"
+  },
+  {
+   "entity_id": "1FM9_3",
+   "sequence": "CPSSHSSLTERHKILHRLLQEGSPS",
+   "description": "STEROID RECEPTOR COACTIVATOR"
+  },
+  {
+   "entity_id": "1FJG_22",
+   "sequence": "GKGDRRTRRGKIWRGTYGKYRPRKKK",
+   "description": "30S RIBOSOMAL PROTEIN THX"
+  },
+  {
+   "entity_id": "1FIZ_2",
+   "sequence": "RDNATCDGPCGLRFRQKLESGMR",
+   "description": "BETA-ACROSIN LIGHT CHAIN"
+  },
+  {
+   "entity_id": "1FIW_2",
+   "sequence": "DNTTCDGPCGVRFRQNRQGGVR",
+   "description": "BETA-ACROSIN LIGHT CHAIN"
+  }
+ ]
+}
