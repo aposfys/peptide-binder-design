@@ -21,6 +21,7 @@ from __future__ import annotations
 import os
 from collections.abc import Sequence
 from dataclasses import dataclass
+from typing import Any
 
 #: Small enough to run on CPU, large enough to be a real language model. Pinned, because
 #: "an ESM score" is not a reproducible statement.
@@ -51,8 +52,10 @@ class EsmScorer:
     def __init__(self, checkpoint: str = DEFAULT_CHECKPOINT, *, batch_size: int = 16):
         self.checkpoint = checkpoint
         self.batch_size = batch_size
-        self._tokenizer = None
-        self._model = None
+        # Typed as Any: transformers' Auto* factories return a union of backend classes
+        # that varies with the installed extras, and pinning it here would be a fiction.
+        self._tokenizer: Any = None
+        self._model: Any = None
 
     def _load(self) -> None:
         if self._model is not None:
