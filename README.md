@@ -47,6 +47,26 @@ Those thresholds are declared and unmeasured; `targets` and `generate` name the
 GPU as the reason they are unimplemented. **No structure-based number appears
 here**, and the result above does not depend on one.
 
+### Where this sits in the literature
+
+The general principle — that how you construct negatives drives apparent performance — is
+not new, and this repository is not the first to say it. It is best established in TCR–pMHC
+specificity prediction, where shuffling within a dataset is known to introduce leakage that
+models exploit instead of learning recognition, and where tools such as STAPLER exist
+specifically to mitigate it. Decoy selection has its own literature in virtual screening.
+
+What I could not find published is this test applied to **protein-language-model scoring of
+peptide binders**. The peptide-binder design literature — PepMLM and target-conditioned
+masked language modelling, DiffPepBuilder, contrastive target-conditioned design — reports
+performance against controls that differ from the positives in composition and length.
+Composition-preserving scrambles are not standard practice there, and the result above is
+what happens when you use them: a filter that reads as working at AUC 0.663 has a
+confidence interval spanning 0.5 once the control keeps its residue census fixed.
+
+There is also a known confound in the same direction worth naming: protein language models
+transfer unevenly to peptide-length sequences, so a score calibrated on protein-length
+input is already on uncertain ground before the control question arises.
+
 ### More
 
 - [Analysis](ANALYSIS.md) — what was done and why, including what the peptide set is and isn't
