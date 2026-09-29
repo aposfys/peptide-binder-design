@@ -3,75 +3,81 @@
  "not_run": "self-consistency RMSD, interface pTM and predicted aligned error: all need a structure predictor on a GPU. No structure-based numbers are reported.",
  "populations": {
   "composition_matched": {
-   "n": 120,
-   "mean": -3.0507,
-   "median": -3.0444
+   "n": 190,
+   "mean": -3.0562,
+   "median": -3.0551
   },
   "length_matched": {
-   "n": 120,
-   "mean": -3.026,
-   "median": -3.0377
+   "n": 190,
+   "mean": -3.0182,
+   "median": -3.0179
   },
   "real": {
-   "n": 120,
-   "mean": -2.8038,
-   "median": -2.9598
+   "n": 190,
+   "mean": -2.823,
+   "median": -2.9536
   },
   "scrambled": {
-   "n": 120,
-   "mean": -2.8759,
-   "median": -3.0064
+   "n": 190,
+   "mean": -2.9049,
+   "median": -3.0047
   }
  },
  "separations": [
   {
    "control_kind": "composition_matched",
-   "n_real": 120,
-   "n_control": 120,
-   "mean_real": -2.8038,
-   "mean_control": -3.0507,
-   "auc": 0.6632,
-   "auc_ci_low": 0.5922,
-   "auc_ci_high": 0.7303,
-   "effect_size": 0.5991,
-   "threshold_at_5pct_control": -2.7931,
-   "real_recall_at_threshold": 0.275
+   "n_real": 190,
+   "n_control": 190,
+   "mean_real": -2.823,
+   "mean_control": -3.0562,
+   "auc": 0.684,
+   "auc_ci_low": 0.6316,
+   "auc_ci_high": 0.7352,
+   "effect_size": 0.6459,
+   "threshold_at_5pct_control": -2.7574,
+   "control_admitted_at_threshold": 0.0526,
+   "real_recall_at_threshold": 0.2737
   },
   {
    "control_kind": "length_matched",
-   "n_real": 120,
-   "n_control": 120,
-   "mean_real": -2.8038,
-   "mean_control": -3.026,
-   "auc": 0.6322,
-   "auc_ci_low": 0.5541,
-   "auc_ci_high": 0.7035,
-   "effect_size": 0.5379,
-   "threshold_at_5pct_control": -2.7312,
-   "real_recall_at_threshold": 0.25
+   "n_real": 190,
+   "n_control": 190,
+   "mean_real": -2.823,
+   "mean_control": -3.0182,
+   "auc": 0.6385,
+   "auc_ci_low": 0.5825,
+   "auc_ci_high": 0.696,
+   "effect_size": 0.5452,
+   "threshold_at_5pct_control": -2.7451,
+   "control_admitted_at_threshold": 0.0526,
+   "real_recall_at_threshold": 0.2684
   },
   {
    "control_kind": "scrambled",
-   "n_real": 120,
-   "n_control": 120,
-   "mean_real": -2.8038,
-   "mean_control": -2.8759,
-   "auc": 0.5467,
-   "auc_ci_low": 0.4711,
-   "auc_ci_high": 0.6144,
-   "effect_size": 0.1371,
-   "threshold_at_5pct_control": -2.2219,
-   "real_recall_at_threshold": 0.075
+   "n_real": 190,
+   "n_control": 190,
+   "mean_real": -2.823,
+   "mean_control": -2.9049,
+   "auc": 0.5689,
+   "auc_ci_low": 0.5116,
+   "auc_ci_high": 0.6282,
+   "effect_size": 0.1804,
+   "threshold_at_5pct_control": -2.2529,
+   "control_admitted_at_threshold": 0.0526,
+   "real_recall_at_threshold": 0.0632
   }
  ],
  "notes": {
-  "peptide_source": "RCSB short chains in complexes",
+  "peptide_source": "RCSB short chains in multi-protein structures",
+  "peptide_set": "data/peptides.json",
+  "peptide_release_cutoff": "2026-09-01",
+  "n_peptides_scored": 190,
   "dropped": {
    "too_short": 125,
    "too_long": 7,
    "non_standard": 47,
    "duplicate": 131
   },
-  "n_peptides": 120
+  "composition_distance_real_vs_scrambled": 0.0
  }
 }

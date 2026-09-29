@@ -1,5 +1,5 @@
 # peptide-binder-design
-The same filter scores 0.66 or 0.55 depending only on which null you compare it against.
+The same filter scores 0.68 or 0.57 depending only on which null you compare it against.
 
 [![CI](https://github.com/aposfys/peptide-binder-design/actions/workflows/ci.yml/badge.svg)](https://github.com/aposfys/peptide-binder-design/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -21,21 +21,26 @@ make test              # 34 tests, no model and no network
 
 ### One filter, three nulls
 
-120 peptide chains observed bound in PDB complexes, scored by ESM-2
-pseudo-log-likelihood:
+190 peptide chains observed bound in PDB complexes, scored by ESM-2
+pseudo-log-likelihood. The threshold in the last two columns is set by the control
+distribution, not by convention, and 5.26% is the closest a 190-sequence sample
+gets to 5%:
 
-| Control family | AUC | 95% CI | Cohen's *d* | Real recall at 5% control FPR |
-| --- | ---: | --- | ---: | ---: |
-| Composition-matched | 0.663 | [0.592, 0.730] | 0.60 | 28% |
-| Length-matched | 0.632 | [0.554, 0.704] | 0.54 | 25% |
-| **Scrambled** | **0.547** | **[0.471, 0.614]** | **0.14** | **7%** |
+| Control family | AUC | 95% CI | Cohen's *d* | Controls admitted | Real recall there |
+| --- | ---: | --- | ---: | ---: | ---: |
+| Composition-matched | 0.684 | [0.632, 0.735] | 0.65 | 5.26% | 27.4% |
+| Length-matched | 0.638 | [0.583, 0.696] | 0.55 | 5.26% | 26.8% |
+| **Scrambled** | **0.569** | **[0.512, 0.628]** | **0.18** | **5.26%** | **6.3%** |
 
-Against naive controls the filter looks like it works. Against
-composition-preserving scrambles **the confidence interval spans 0.5**. The
-scrambled arm holds residue composition exactly fixed — measured distance
-0.000000 — so it differs from the real peptides only in residue *order*, which is
-the only place binding information could live. Set a threshold strict enough to
-reject 95% of scrambles and it rejects 93% of the real peptides too.
+The scrambled arm holds residue composition exactly fixed, measured distance
+0.000000, so it differs from the real peptides only in residue *order*, which is
+the only place binding information could live. Swap the naive control for that one
+and the effect size falls by a factor of 3.6 and the recall by a factor of 4.3. A
+threshold strict enough to admit 5.26% of scrambles rejects 93.7% of the real
+peptides.
+
+The scrambled interval excludes 0.5, so the residual order signal is small rather
+than absent. The claim here is about the size of the gap between nulls.
 
 This is not a criticism of ESM. Composition- and length-matched controls are drawn
 from background frequencies and real peptides are not, so the model is reading a

@@ -46,27 +46,34 @@ worth.
 
 ## What was measured
 
-120 peptide chains observed bound in PDB complexes, against 120 of each control family:
+190 peptide chains observed bound in PDB complexes, against 190 of each control family:
 
-| Control | AUC | 95% CI | Cohen's *d* | Recall at 5% control FPR |
-| --- | ---: | --- | ---: | ---: |
-| Composition-matched | 0.663 | [0.592, 0.730] | 0.60 | 28% |
-| Length-matched | 0.632 | [0.554, 0.704] | 0.54 | 25% |
-| **Scrambled** | **0.547** | **[0.471, 0.614]** | **0.14** | **7%** |
+| Control | AUC | 95% CI | Cohen's *d* | Controls admitted | Real recall there |
+| --- | ---: | --- | ---: | ---: | ---: |
+| Composition-matched | 0.684 | [0.632, 0.735] | 0.65 | 5.26% | 27.4% |
+| Length-matched | 0.638 | [0.583, 0.696] | 0.55 | 5.26% | 26.8% |
+| **Scrambled** | **0.569** | **[0.512, 0.628]** | **0.18** | **5.26%** | **6.3%** |
 
-**The same filter reports 0.663 or 0.547 depending only on which null it is compared
-against, and the scrambled interval spans 0.5.** A threshold strict enough to reject 95% of
-scrambles rejects 93% of the real peptides too.
+**The same filter reports 0.684 or 0.569 depending only on which null it is compared
+against.** Effect size falls by a factor of 3.6 and recall at a matched control admission
+rate by a factor of 4.3. A threshold strict enough to admit 5.26% of scrambles rejects
+93.7% of the real peptides.
+
+The scrambled interval is [0.512, 0.628], which excludes 0.5. So there is a small residual
+order signal at this sample size, and the claim is about the size of the gap between nulls
+rather than about the absence of a signal. An earlier run over the first 120 of these
+peptides put the scrambled interval at [0.471, 0.614], spanning 0.5, and that was a
+sample-size artifact rather than a null result. `results/RESULTS.md` has both runs.
 
 None of this is a criticism of ESM. The naive controls are drawn from background
-frequencies and real peptides are not; the model notices, and that is a compositional
-signal. The scrambled arm removes it by construction, and what is left is not
-distinguishable from chance at this sample size.
+frequencies and real peptides are not, the model notices, and that is a compositional
+signal. The scrambled arm removes it by construction, and what survives is a fraction of
+what the naive controls suggested.
 
 ## What the peptide set actually is
 
-Short protein chains (8–30 residues, standard amino acids) from RCSB structures containing
-more than one protein entity. That is peptides observed bound to a protein partner — the
+Short protein chains (8-30 residues, standard amino acids) from RCSB structures containing
+more than one protein entity, released on or before 2026-09-01. That is peptides observed bound to a protein partner — the
 closest thing to a validated binder obtainable without a wet lab. It is **not** curated:
 some short chains are subunits rather than ligands, and a few are crystallisation tags. The
 population is noisy in a known direction, and that is stated here rather than after it has
@@ -76,12 +83,20 @@ been forgotten.
 
 - Anything about self-consistency RMSD, interface pTM or interface confidence. Those are the
   interesting filters and they remain unrun.
-- A bound on the effect. 120 peptides shows the CI crosses 0.5; it does not pin the size.
+- A tight bound on the residual order signal. 190 peptides puts the scrambled interval just
+  off 0.5. It does not pin the size of what is left.
 - Anything about designed sequences. Only observed ones were scored.
 
 ## What would change the conclusion
 
-A GPU. The same three control families through the structure-based stack is the experiment
-this repository was designed for, and the null machinery it needs is now built and tested.
-The prediction implied by the result above is uncomfortable: a stack validated only against
+Two things, and only one of them needs hardware.
+
+**More peptides, which is free.** The first version of this analysis scored 120 of the 190
+peptides already committed to `data/peptides.json`, and the extra 70 moved the scrambled
+interval off 0.5. Widening the length window or raising the search limit is CPU work and
+would bound the residual signal better than anything else available here.
+
+**A GPU, for the experiment this was designed for.** The same three control families through
+the structure-based stack. The null machinery it needs is now built and tested. The
+prediction implied by the result above is uncomfortable: a stack validated only against
 length-matched decoys may be reporting the same kind of number.
