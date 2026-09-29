@@ -5,8 +5,8 @@ result than the one that was blocked.
 
 ## What could not be run, and what replaced it
 
-The structure-based filter stack — self-consistency RMSD, interface pTM, predicted aligned
-error — needs a structure predictor on a GPU this project has never had. Those thresholds
+The structure-based filter stack (self-consistency RMSD, interface pTM, predicted aligned
+error) needs a structure predictor on a GPU this project has never had. Those thresholds
 are declared in `filters.py` and remain unmeasured. RFdiffusion generation is blocked for
 the same reason.
 
@@ -24,7 +24,7 @@ evidence of binding, and whatever the number is, it is a property of the control
 
 **Three control families, removing different things.** Length-matched controls share only
 length. Composition-matched controls share the pooled composition. **Scrambled controls
-share composition exactly, per peptide, and differ only in residue order** — which is the
+share composition exactly, per peptide, and differ only in residue order**, which is the
 only place binding information could live. Measured composition distance between real and
 scrambled is `0.000000`, and a test asserts it, so "composition-preserving" is a checked
 claim rather than a label.
@@ -34,7 +34,7 @@ other and shrink the effective size of the null.
 
 **Exact pseudo-log-likelihood, masking each position in turn.** The cheap single-pass
 approximation lets the model see the residue it is predicting, which inflates every score
-and — worse — inflates them unevenly.
+and, worse, inflates them unevenly.
 
 **Length normalisation.** Without it the filter ranks short sequences above long ones for
 arithmetic reasons. Length is exactly what the length-matched arm holds constant, so the
@@ -73,9 +73,10 @@ what the naive controls suggested.
 ## What the peptide set actually is
 
 Short protein chains (8-30 residues, standard amino acids) from RCSB structures containing
-more than one protein entity, released on or before 2026-09-01. That is peptides observed bound to a protein partner — the
-closest thing to a validated binder obtainable without a wet lab. It is **not** curated:
-some short chains are subunits rather than ligands, and a few are crystallisation tags. The
+more than one protein entity, released on or before 2026-09-01. That is peptides observed
+bound to a protein partner, the closest thing to a validated binder obtainable without a wet
+lab. It is **not** curated. Some short chains are subunits rather than ligands, and a few are
+crystallisation tags. The
 population is noisy in a known direction, and that is stated here rather than after it has
 been forgotten.
 

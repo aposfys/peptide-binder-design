@@ -1,12 +1,14 @@
-# peptide-binder-design — design notes
+# peptide-binder-design design notes
 
 Written before any design was generated, so the evaluation cannot be adjusted to fit the
 results.
 
-De novo binder design is the fastest-moving area in computational structural biology:
+De novo binder design is the fastest-moving area in computational structural biology.
 RFdiffusion now produces antibodies whose designed CDR loops match cryo-EM structures at
-atomic accuracy, RFpeptides extends the same machinery to macrocyclic peptides, and a 2026
-*Nature* review argues the binder-design problem is close to solved.
+atomic accuracy [2], RFpeptides extends the same machinery to macrocyclic peptides [3], and a
+2026 *Nature* review states that designing new structures, assemblies and binders is close to
+being solved, while reserving catalysis of high-barrier reactions, switches and nanomachines
+as open [5]. Numbers in brackets point at [REFERENCES.md](REFERENCES.md).
 
 **The question:** how much of a reported in-silico success rate survives when you remove the
 circularity?
@@ -22,8 +24,8 @@ circularity?
 ## The circularity problem, stated plainly
 
 The standard pipeline generates a backbone with a diffusion model trained on the PDB, then
-validates it by checking that a structure predictor — trained on the same PDB, often sharing
-components — predicts the same complex. Agreement between two models with shared training
+validates it by checking that a structure predictor (trained on the same PDB, often sharing
+components) predicts the same complex. Agreement between two models with shared training
 data and shared inductive biases is not evidence of binding. It is evidence of agreement.
 
 Published computational success rates and wet-lab hit rates are different numbers, and the
@@ -35,7 +37,7 @@ do, and what is worth doing, is measure how well the standard filter stack separ
 3. **known experimental binders of the same target**, held out.
 
 A filter stack that cannot rank known binders above scrambled sequences is not validating
-anything, whatever pass rate it reports on novel designs. That result — if it appears — is
+anything, whatever pass rate it reports on novel designs. That result, if it appears, is
 the finding.
 
 ## Traps this pipeline is built to avoid
@@ -64,7 +66,7 @@ src/pepdesign/
   cli.py        `python -m pepdesign.cli`
 ```
 
-34 tests, none needing a model or a network.
+35 tests, none needing a model or a network.
 
 `targets`, `controls` and `evaluate` are reachable and need no GPU. Only `generate`
 names the GPU as the reason it is unimplemented, and inside `targets` only

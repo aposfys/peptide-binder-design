@@ -64,7 +64,7 @@ composition-preserving null.
 That reading was a sample-size artifact. The 70 unscored peptides were already in
 `data/peptides.json` and needed no GPU. Scoring all 190 moves the scrambled interval off
 0.5 without changing the argument about controls, which survives at both sample sizes and
-is stronger at the larger one. Both runs reproduce from the committed code:
+is stronger at the larger one. Both runs reproduce from the committed code, and
 `pepdesign analysis --max-peptides 120 --force` returns the 120-peptide table exactly.
 
 ## Why this matters for the pass rates the field reports

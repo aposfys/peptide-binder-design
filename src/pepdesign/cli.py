@@ -40,7 +40,7 @@ def build_parser() -> argparse.ArgumentParser:
         "controls", help="write the scrambled and length-matched control sets"
     )
     controls.add_argument("--search-limit", type=int, default=500)
-    controls.add_argument("--max-peptides", type=int, default=120)
+    controls.add_argument("--max-peptides", type=int, default=None, help=MAX_PEPTIDES_HELP)
     controls.add_argument("--seed", type=int, default=0)
 
     sub.add_parser("evaluate", help="print the separation table from an existing run")
@@ -49,7 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
         "analysis", help="peptides, controls, sequence-level scoring and separation"
     )
     analysis.add_argument("--search-limit", type=int, default=500)
-    analysis.add_argument("--max-peptides", type=int, default=120)
+    analysis.add_argument("--max-peptides", type=int, default=None, help=MAX_PEPTIDES_HELP)
     analysis.add_argument("--seed", type=int, default=0)
     analysis.add_argument(
         "--force",
@@ -59,6 +59,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     return parser
 
+
+#: A default of "all of them" rather than a number, because a default that silently scored
+#: part of the cached set is how the published run came to cover 120 of 190 peptides.
+MAX_PEPTIDES_HELP = "how many cached peptides to score; the default is all of them"
 
 #: Subcommands that genuinely need hardware this project has never had.
 GPU_GATED = {
@@ -92,6 +96,8 @@ def _load_peptides(args: argparse.Namespace):
             "no usable peptides were retrieved from RCSB. "
             "Check network access, or raise --search-limit."
         )
+    if args.max_peptides is None:
+        return peptides, dropped
     return peptides[: args.max_peptides], dropped
 
 
@@ -167,12 +173,19 @@ def _dispatch(args: argparse.Namespace) -> int:
             raise SystemExit(f"no findings at {path}. Run 'pepdesign analysis' first.")
         findings = _json.loads(path.read_text())
         print(f"filter: {findings['filter']}")
-        print(f"{'control':<22} {'AUC':>7} {'95% CI':>18} {'d':>7} {'recall@5%':>10}")
+        # The threshold aims at 5% of controls and a finite sample lands beside it, so the
+        # admitted fraction is printed next to the recall it buys rather than assumed.
+        print(
+            f"{'control':<22} {'AUC':>7} {'95% CI':>18} {'d':>7} {'ctrl in':>8} {'recall':>8}"
+        )
         for sep in findings["separations"]:
             ci = f"[{sep['auc_ci_low']:.3f}, {sep['auc_ci_high']:.3f}]"
+            admitted = sep.get("control_admitted_at_threshold")
+            admitted_text = "?" if admitted is None else f"{admitted:.3f}"
             print(
                 f"{sep['control_kind']:<22} {sep['auc']:>7.3f} {ci:>18} "
-                f"{sep['effect_size']:>7.2f} {sep['real_recall_at_threshold']:>10.2f}"
+                f"{sep['effect_size']:>7.2f} {admitted_text:>8} "
+                f"{sep['real_recall_at_threshold']:>8.3f}"
             )
         print(f"\nnot run: {findings['not_run']}")
         return 0
@@ -186,10 +199,11 @@ def _dispatch(args: argparse.Namespace) -> int:
         if existing.exists() and not args.force:
             previous = _json.loads(existing.read_text())
             previous_n = previous.get("populations", {}).get("real", {}).get("n", 0)
-            if previous_n > args.max_peptides:
+            limit = args.max_peptides
+            if limit is not None and previous_n > limit:
                 raise SystemExit(
                     f"{existing} holds a run over {previous_n} peptides and this run would "
-                    f"use {args.max_peptides}. Refusing to overwrite a larger result.\n"
+                    f"use {limit}. Refusing to overwrite a larger result.\n"
                     "Pass --force, or raise --max-peptides."
                 )
 

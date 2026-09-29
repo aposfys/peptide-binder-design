@@ -13,7 +13,7 @@ make install-score     # adds torch and transformers, which only the scorer need
 pepdesign evaluate     # print the separation table from the committed run
 pepdesign controls     # write the control sets and their composition distance
 pepdesign analysis     # rerun it all: peptides, controls, ESM-2 scoring, separation
-make test              # 34 tests, no model and no network
+make test              # 35 tests, no model and no network
 ```
 
 `evaluate`, `controls`, `targets` and the tests run on a plain `make install`. Only
@@ -41,6 +41,8 @@ peptides.
 
 The scrambled interval excludes 0.5, so the residual order signal is small rather
 than absent. The claim here is about the size of the gap between nulls.
+`results/scores.csv` holds all 760 per-sequence scores, so every figure in the
+table re-derives from committed files with no model and no network.
 
 This is not a criticism of ESM. Composition- and length-matched controls are drawn
 from background frequencies and real peptides are not, so the model is reading a
@@ -50,34 +52,16 @@ not a result.**
 
 ### Scope
 
-The structure-based stack — self-consistency RMSD, interface pTM, predicted
-aligned error — needs a structure predictor on a GPU this repo has never had.
+The structure-based stack (self-consistency RMSD, interface pTM, predicted
+aligned error) needs a structure predictor on a GPU this repo has never had.
 Those thresholds are declared and unmeasured, and `generate` names the GPU as the
 reason it is unimplemented. **No structure-based number appears here**, and the
 result above does not depend on one.
 
-### Where this sits in the literature
-
-The general principle — that how you construct negatives drives apparent performance — is
-not new, and this repository is not the first to say it. It is best established in TCR–pMHC
-specificity prediction, where shuffling within a dataset is known to introduce leakage that
-models exploit instead of learning recognition, and where tools such as STAPLER exist
-specifically to mitigate it. Decoy selection has its own literature in virtual screening.
-
-What I could not find published is this test applied to **protein-language-model scoring of
-peptide binders**. The peptide-binder design literature — PepMLM and target-conditioned
-masked language modelling, DiffPepBuilder, contrastive target-conditioned design — reports
-performance against controls that differ from the positives in composition and length.
-Composition-preserving scrambles are not standard practice there, and the result above is
-what happens when you use them: a filter that reads as working at AUC 0.663 has a
-confidence interval spanning 0.5 once the control keeps its residue census fixed.
-
-There is also a known confound in the same direction worth naming: protein language models
-transfer unevenly to peptide-length sequences, so a score calibrated on protein-length
-input is already on uncertain ground before the control question arises.
-
 ### More
 
-- [Analysis](ANALYSIS.md) — what was done and why, including what the peptide set is and isn't
-- [Results](results/RESULTS.md) — full results and limitations
-- [Design](docs/DESIGN.md) — the circularity problem in full, and the traps this avoids
+- [Analysis](ANALYSIS.md), what was done and why, including what the peptide set is and is not
+- [Results](results/RESULTS.md), the full table, how to recheck it, and the limitations
+- [Design](docs/DESIGN.md), the circularity problem in full and the traps this avoids
+- [Literature](docs/LITERATURE.md), what is and is not new here
+- [References](docs/REFERENCES.md), every work the other four documents name

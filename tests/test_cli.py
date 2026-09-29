@@ -75,3 +75,10 @@ def test_only_the_hotspot_step_of_targets_is_gpu_gated(tmp_path):
     message = str(excinfo.value)
     assert "GPU" in message
     assert "Drop --hotspots" in message
+
+
+def test_max_peptides_defaults_to_the_whole_cached_set():
+    """A numeric default is how the published run came to cover 120 of 190 peptides."""
+    parser = build_parser()
+    assert parser.parse_args(["analysis"]).max_peptides is None
+    assert parser.parse_args(["controls"]).max_peptides is None

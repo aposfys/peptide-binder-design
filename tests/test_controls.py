@@ -1,4 +1,4 @@
-"""Controls and separation metrics — the null machinery, with no model required."""
+"""Controls and separation metrics, the null machinery, with no model required."""
 
 from __future__ import annotations
 
