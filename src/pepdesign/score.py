@@ -27,6 +27,25 @@ from typing import Any
 #: "an ESM score" is not a reproducible statement.
 DEFAULT_CHECKPOINT = "facebook/esm2_t12_35M_UR50D"
 
+#: The default install deliberately pulls in nothing. torch and transformers are a large
+#: download and only this module needs them, so they live in the ``score`` extra and the
+#: absence of them is reported as an instruction rather than as a traceback.
+MISSING_BACKENDS = (
+    "the ESM-2 scorer needs torch and transformers, which the default install does not "
+    'pull in. Run pip install -e ".[score]" and try again. '
+    "'pepdesign controls' and 'pepdesign evaluate' do not need them."
+)
+
+
+def import_backends() -> tuple[Any, Any, Any]:
+    """Return ``(torch, AutoTokenizer, AutoModelForMaskedLM)`` or say what to install."""
+    try:
+        import torch
+        from transformers import AutoModelForMaskedLM, AutoTokenizer
+    except ImportError as exc:
+        raise SystemExit(MISSING_BACKENDS) from exc
+    return torch, AutoTokenizer, AutoModelForMaskedLM
+
 
 @dataclass(frozen=True)
 class Scored:
@@ -56,6 +75,7 @@ class EsmScorer:
         # that varies with the installed extras, and pinning it here would be a fiction.
         self._tokenizer: Any = None
         self._model: Any = None
+        self._torch: Any = None
 
     def _load(self) -> None:
         if self._model is not None:
@@ -63,11 +83,12 @@ class EsmScorer:
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
         import warnings
 
-        from transformers import AutoModelForMaskedLM, AutoTokenizer
+        torch, auto_tokenizer, auto_model = import_backends()
 
         warnings.filterwarnings("ignore")
-        self._tokenizer = AutoTokenizer.from_pretrained(self.checkpoint)
-        self._model = AutoModelForMaskedLM.from_pretrained(self.checkpoint)
+        self._torch = torch
+        self._tokenizer = auto_tokenizer.from_pretrained(self.checkpoint)
+        self._model = auto_model.from_pretrained(self.checkpoint)
         self._model.eval()
 
     def score(self, sequence: str) -> float:
@@ -78,9 +99,8 @@ class EsmScorer:
         residue it is predicting, which inflates the score for every sequence and, worse,
         inflates it unevenly.
         """
-        import torch
-
         self._load()
+        torch = self._torch
         encoded = self._tokenizer(sequence, return_tensors="pt")
         input_ids = encoded["input_ids"]
         attention = encoded["attention_mask"]

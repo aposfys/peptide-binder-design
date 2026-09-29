@@ -89,3 +89,30 @@ def test_separation_reports_a_confidence_interval_that_brackets_the_point():
     result = separate(real, control, "scrambled")
     assert result.auc_ci_low <= result.auc <= result.auc_ci_high
     assert result.control_kind == "scrambled"
+
+
+def test_threshold_reports_the_control_fraction_it_actually_admits():
+    """A discrete sample cannot land on exactly 5%, so the realised rate is reported."""
+    real = [float(value) for value in range(120)]
+    control = [float(value) for value in range(120)]
+    result = separate(real, control, "scrambled")
+    assert result.control_admitted_at_threshold == pytest.approx(7 / 120, abs=1e-4)
+    assert result.control_admitted_at_threshold > 0.05
+
+
+def test_per_sequence_scores_are_written_so_aggregates_can_be_rechecked(tmp_path):
+    from dataclasses import dataclass
+
+    from pepdesign.evaluate import write_scores
+
+    @dataclass
+    class Item:
+        identifier: str
+        kind: str
+        length: int
+        pseudo_log_likelihood: float
+
+    path = write_scores([Item("1ABC_1", "real", 9, -2.5)], tmp_path / "scores.csv")
+    lines = path.read_text().splitlines()
+    assert lines[0] == "identifier,kind,length,pseudo_log_likelihood"
+    assert lines[1] == "1ABC_1,real,9,-2.500000"

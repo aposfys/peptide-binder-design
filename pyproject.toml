@@ -21,6 +21,9 @@ dependencies = []
 
 [project.optional-dependencies]
 bio = ["biopython>=1.80"]
+# The ESM-2 scorer behind `pepdesign analysis`. CPU is enough.
+score = ["torch>=2.2", "transformers>=4.40"]
+# Backbone generation, which needs a GPU and is not implemented.
 design = ["torch>=2.2"]
 folding = ["boltz>=2.0"]
 figures = ["matplotlib>=3.7"]

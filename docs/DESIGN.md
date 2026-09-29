@@ -64,10 +64,11 @@ src/pepdesign/
   cli.py        `python -m pepdesign.cli`
 ```
 
-26 tests, none needing a model or a network.
+34 tests, none needing a model or a network.
 
-`controls` and `evaluate` are CPU-only and reachable; `targets` and `generate`
-name the GPU as the reason they are unimplemented. `controls` was previously
-refused with a GPU message despite being implemented — a reachable command hidden
-behind a gate it did not need. `analysis` refuses to overwrite findings from a
-larger peptide set unless passed `--force`.
+`targets`, `controls` and `evaluate` are reachable and need no GPU. Only `generate`
+names the GPU as the reason it is unimplemented, and inside `targets` only
+`--hotspots` does. Both `controls` and `targets` were previously refused outright
+with a GPU message despite their implemented paths being network and CPU only, which
+is a reachable command hidden behind a gate it did not need. `analysis` refuses to
+overwrite findings from a larger peptide set unless passed `--force`.

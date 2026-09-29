@@ -18,8 +18,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--results-dir", type=Path, default=Path("results"))
     sub = parser.add_subparsers(dest="command", required=True)
 
-    targets = sub.add_parser("targets", help="prepare targets, hotspots and held-out binders")
-    targets.add_argument("--target", required=True)
+    targets = sub.add_parser("targets", help="retrieve and cache the peptide set from RCSB")
+    targets.add_argument("--search-limit", type=int, default=500)
+    targets.add_argument(
+        "--hotspots",
+        action="store_true",
+        help="also define target hotspots from a predicted complex; needs a GPU",
+    )
 
     generate = sub.add_parser("generate", help="backbone generation and sequence design")
     generate.add_argument("--target", required=True)
@@ -57,9 +62,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 #: Subcommands that genuinely need hardware this project has never had.
 GPU_GATED = {
-    "targets": "hotspot definition from a generated complex",
     "generate": "RFdiffusion / ProteinMPNN generation",
 }
+
+#: The one step inside an otherwise CPU-only subcommand that needs the same hardware.
+HOTSPOTS_NEED_GPU = (
+    "hotspot definition needs a predicted complex, which needs a GPU this project has not "
+    "had access to. Drop --hotspots to retrieve and cache the peptide set, which is pure "
+    "network and CPU and is the step 'pepdesign analysis' depends on."
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -91,6 +102,25 @@ def _dispatch(args: argparse.Namespace) -> int:
             "this project has not had access to.\n"
             "Run 'pepdesign analysis' for the sequence-level experiment, which does not."
         )
+
+    if args.command == "targets":
+        # Retrieval is network plus CPU and is the code that built data/peptides.json.
+        # Only the hotspot step needs a GPU, so only the hotspot step is refused.
+        if args.hotspots:
+            raise SystemExit(HOTSPOTS_NEED_GPU)
+        from pepdesign.targets import build
+
+        path = args.data_dir / "peptides.json"
+        cached = path.exists()
+        peptides, dropped = build(path, limit=args.search_limit)
+        source = "cache" if cached else "RCSB"
+        print(f"{len(peptides)} peptides from {source} -> {path} (dropped {dropped})")
+        if cached:
+            print(
+                "This is the committed set the published AUCs came from. Delete the file to "
+                "re-retrieve, which returns a different set because the PDB grows."
+            )
+        return 0
 
     if args.command == "controls":
         # Implemented and CPU-only. This used to be refused with a GPU message.
@@ -164,8 +194,9 @@ def _dispatch(args: argparse.Namespace) -> int:
                 )
 
         from pepdesign.controls import CONTROL_KINDS, composition_distance, make_controls
-        from pepdesign.evaluate import build_findings, write
+        from pepdesign.evaluate import build_findings, write, write_scores
         from pepdesign.score import EsmScorer
+        from pepdesign.targets import SNAPSHOT_RELEASE_DATE
 
         peptides, dropped = _load_peptides(args)
         pairs = [(p.entity_id, p.sequence) for p in peptides]
@@ -186,11 +217,16 @@ def _dispatch(args: argparse.Namespace) -> int:
             scored,
             notes={
                 "peptide_source": "RCSB short chains in multi-protein structures",
+                "peptide_set": str(args.data_dir / "peptides.json"),
+                "peptide_release_cutoff": SNAPSHOT_RELEASE_DATE,
+                "n_peptides_scored": len(pairs),
                 "dropped": dropped,
                 "composition_distance_real_vs_scrambled": round(distance, 8),
             },
         )
         write(findings, args.results_dir / "findings.json")
+        scores_path = write_scores(scored, args.results_dir / "scores.csv")
+        print(f"per-sequence scores -> {scores_path}")
         for separation in findings["separations"]:
             print(
                 f"  vs {separation['control_kind']:<20} AUC {separation['auc']:.3f} "

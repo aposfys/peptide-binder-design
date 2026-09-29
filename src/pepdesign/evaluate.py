@@ -32,6 +32,10 @@ class Separation:
     effect_size: float
     #: Score threshold that would keep 95% of controls out.
     threshold_at_5pct_control: float
+    #: Fraction of controls that actually clear that threshold. A discrete sample cannot
+    #: land on exactly 5%, and a repository arguing about denominators should print the
+    #: one it used rather than the one it aimed at.
+    control_admitted_at_threshold: float
     #: Fraction of real peptides that clear that threshold.
     real_recall_at_threshold: float
 
@@ -117,6 +121,9 @@ def separate(
         auc_ci_high=round(high, 4),
         effect_size=round(cohens_d(real, control), 4),
         threshold_at_5pct_control=round(threshold, 4),
+        control_admitted_at_threshold=round(
+            sum(1 for value in control if value >= threshold) / len(control), 4
+        ),
         real_recall_at_threshold=round(
             sum(1 for value in real if value >= threshold) / len(real), 4
         ),
@@ -160,4 +167,21 @@ def build_findings(scored, *, notes: dict | None = None) -> dict:
 def write(findings: dict, out_path: Path) -> Path:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(findings, indent=1))
+    return out_path
+
+
+def write_scores(scored, out_path: Path) -> Path:
+    """Write every per-sequence score, so the aggregates can be checked without a model.
+
+    Aggregates alone are not checkable. With this file an AUC, a bootstrap interval and an
+    effect size can all be re-derived from committed artifacts by anyone, with no download
+    and no GPU.
+    """
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["identifier,kind,length,pseudo_log_likelihood"]
+    lines += [
+        f"{item.identifier},{item.kind},{item.length},{item.pseudo_log_likelihood:.6f}"
+        for item in scored
+    ]
+    out_path.write_text("\n".join(lines) + "\n")
     return out_path

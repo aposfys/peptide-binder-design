@@ -8,12 +8,16 @@ A triage filter for peptide binders, evaluated against three control families to
 show that the reported performance is a property of the control, not the filter.
 
 ```
-make install
-pepdesign analysis     # peptides, controls, scoring, separation
+make install           # controls, evaluate and the tests
+make install-score     # adds torch and transformers, which only the scorer needs
+pepdesign evaluate     # print the separation table from the committed run
 pepdesign controls     # write the control sets and their composition distance
-pepdesign evaluate     # print the separation table from an existing run
-make test              # 26 tests, no model and no network
+pepdesign analysis     # rerun it all: peptides, controls, ESM-2 scoring, separation
+make test              # 34 tests, no model and no network
 ```
+
+`evaluate`, `controls`, `targets` and the tests run on a plain `make install`. Only
+`analysis` needs the `score` extra, because only `analysis` loads ESM-2.
 
 ### One filter, three nulls
 
@@ -43,9 +47,9 @@ not a result.**
 
 The structure-based stack — self-consistency RMSD, interface pTM, predicted
 aligned error — needs a structure predictor on a GPU this repo has never had.
-Those thresholds are declared and unmeasured; `targets` and `generate` name the
-GPU as the reason they are unimplemented. **No structure-based number appears
-here**, and the result above does not depend on one.
+Those thresholds are declared and unmeasured, and `generate` names the GPU as the
+reason it is unimplemented. **No structure-based number appears here**, and the
+result above does not depend on one.
 
 ### Where this sits in the literature
 

@@ -1,36 +1,45 @@
-.PHONY: install data design controls analysis test clean clean-data all
+.PHONY: install install-score data controls analysis evaluate design test clean clean-data all
 
 PYTHON ?= python3
 TARGET ?= 1KMV
 
 all: analysis
 
-## Install the package plus dev tooling. Generation backends are GPU-bound extras:
-##   pip install -e ".[design,folding]"
+## Install the package plus dev tooling. Enough for controls, evaluate and the tests.
 install:
 	$(PYTHON) -m pip install -e ".[dev]"
 
-## Target structures, hotspot definitions, and the held-out known-binder set
-data:
-	$(PYTHON) -m pepdesign.cli targets --target $(TARGET)
+## Add torch and transformers, which only the ESM-2 scorer needs.
+install-score:
+	$(PYTHON) -m pip install -e ".[dev,score]"
 
-## Backbone generation and sequence design (GPU)
-design: data
-	$(PYTHON) -m pepdesign.cli generate --target $(TARGET)
+## Peptides, controls, ESM-2 scoring and the separation table. Needs the score extra.
+analysis:
+	$(PYTHON) -m pepdesign.cli analysis
 
-## Scrambled and length-matched controls, through the identical filter stack
-controls: design
+## The control sets and their composition distance. CPU only, no model.
+controls:
 	$(PYTHON) -m pepdesign.cli controls
 
-## Separation of designs / controls / known binders -- the actual result
-analysis: controls
+## Print the separation table from results/findings.json.
+evaluate:
 	$(PYTHON) -m pepdesign.cli evaluate
+
+## The peptide set, retrieved from RCSB and cached in data/peptides.json
+data:
+	$(PYTHON) -m pepdesign.cli targets
+
+## Backbone generation and sequence design. GPU, unimplemented, exits with that message.
+design:
+	$(PYTHON) -m pepdesign.cli generate --target $(TARGET)
 
 test:
 	$(PYTHON) -m pytest -q
 
+## Only the generated control dump. results/findings.json, results/scores.csv and
+## results/RESULTS.md are committed artifacts and are left alone.
 clean:
-	rm -rf results/*
+	rm -f results/controls.json
 	find . -name __pycache__ -type d -exec rm -rf {} +
 
 ## Also delete cached structures and generated designs

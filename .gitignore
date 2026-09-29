@@ -14,3 +14,4 @@ data/*.parquet
 data/*.sdf
 results/models/
 results/*.pkl
+results/controls.json

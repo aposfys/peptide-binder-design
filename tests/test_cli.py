@@ -44,3 +44,34 @@ def test_subcommands_parse():
     parser = build_parser()
     assert parser.parse_args(["analysis"]).command == "analysis"
     assert parser.parse_args(["controls"]).command == "controls"
+
+
+def test_targets_is_reachable_because_retrieval_needs_no_gpu():
+    """Retrieval is network plus CPU and is the code that built data/peptides.json."""
+    assert "targets" not in GPU_GATED
+
+
+def test_targets_reads_the_committed_set_and_says_so(tmp_path, capsys):
+    data = tmp_path / "peptides.json"
+    data.write_text(
+        json.dumps(
+            {
+                "dropped": {},
+                "peptides": [
+                    {"entity_id": "1ABC_1", "sequence": "ACDEFGHIK", "description": "x"}
+                ],
+            }
+        )
+    )
+    assert main(["--data-dir", str(tmp_path), "targets"]) == 0
+    out = capsys.readouterr().out
+    assert "1 peptides from cache" in out
+    assert "published AUCs came from" in out
+
+
+def test_only_the_hotspot_step_of_targets_is_gpu_gated(tmp_path):
+    with pytest.raises(SystemExit) as excinfo:
+        main(["--data-dir", str(tmp_path), "targets", "--hotspots"])
+    message = str(excinfo.value)
+    assert "GPU" in message
+    assert "Drop --hotspots" in message

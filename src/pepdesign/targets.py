@@ -9,6 +9,12 @@ are peptides observed bound to a protein partner, which is the closest thing to 
 subunits of a complex rather than ligands, and a few are crystallisation tags. The
 population is a proxy, it is noisy in a known direction, and every result here should be
 read with that in mind rather than after it has been forgotten.
+
+**On reproducibility.** The PDB grows, so a query with no release-date cutoff and no sort
+order returns a different set every month, and an AUC computed over it is not a checkable
+number. The query below is pinned to a release date and the identifiers are sorted before
+use. The set the published results were computed over is the one committed at
+``data/peptides.json``, and ``build`` prefers that file whenever it exists.
 """
 
 from __future__ import annotations
@@ -27,6 +33,10 @@ STANDARD_AMINO_ACIDS = set("ACDEFGHIKLMNPQRSTVWY")
 
 MIN_LENGTH = 8
 MAX_LENGTH = 30
+
+#: Release-date cutoff for the peptide query. Without it the result set moves with every
+#: PDB release and no number computed over it can be checked later.
+SNAPSHOT_RELEASE_DATE = "2026-09-01"
 
 
 @dataclass(frozen=True)
@@ -70,9 +80,14 @@ def _get(url: str, attempts: int = 4) -> dict:
     raise RuntimeError(f"RCSB GraphQL failed after {attempts} attempts") from last
 
 
-def search_entity_ids(*, limit: int = 400) -> list[str]:
-    """Short protein entities that share their structure with another protein entity."""
-    payload = {
+def search_payload(*, limit: int, released_on_or_before: str) -> dict:
+    """The RCSB search body: short protein entities sharing a structure with another one.
+
+    Pinned two ways. The release-date node bounds which entries can match at all, and the
+    sort clause fixes which ones the first ``limit`` rows are, so the query is a snapshot
+    rather than whatever the server happens to rank highest today.
+    """
+    return {
         "query": {
             "type": "group",
             "logical_operator": "and",
@@ -104,16 +119,44 @@ def search_entity_ids(*, limit: int = 400) -> list[str]:
                         "value": 1,
                     },
                 },
+                {
+                    "type": "terminal",
+                    "service": "text",
+                    "parameters": {
+                        "attribute": "rcsb_accession_info.initial_release_date",
+                        "operator": "less_or_equal",
+                        "value": released_on_or_before,
+                    },
+                },
             ],
         },
         "return_type": "polymer_entity",
         "request_options": {
             "paginate": {"start": 0, "rows": limit},
             "results_content_type": ["experimental"],
+            "sort": [
+                {
+                    "sort_by": "rcsb_accession_info.initial_release_date",
+                    "direction": "asc",
+                }
+            ],
         },
     }
-    response = _post(RCSB_SEARCH, payload)
-    return [row["identifier"] for row in response.get("result_set", [])]
+
+
+def search_entity_ids(
+    *, limit: int = 400, released_on_or_before: str = SNAPSHOT_RELEASE_DATE
+) -> list[str]:
+    """Short protein entities that share their structure with another protein entity.
+
+    Identifiers come back sorted, so downstream slicing such as ``--max-peptides`` picks
+    the same peptides on every run instead of whatever order the server replied in.
+    """
+    response = _post(
+        RCSB_SEARCH,
+        search_payload(limit=limit, released_on_or_before=released_on_or_before),
+    )
+    return sorted(row["identifier"] for row in response.get("result_set", []))
 
 
 def fetch_sequences(entity_ids: list[str], *, batch: int = 50) -> list[Peptide]:
@@ -173,7 +216,12 @@ def usable(peptides: list[Peptide]) -> tuple[list[Peptide], dict[str, int]]:
 
 
 def build(out_path: Path, *, limit: int = 400) -> tuple[list[Peptide], dict[str, int]]:
-    """Fetch and filter the peptide set, cached."""
+    """Fetch and filter the peptide set, cached.
+
+    The cache is load-bearing, not a speed-up. ``out_path`` is the exact set the published
+    results were computed over, so it is read in preference to the network whenever it is
+    present.
+    """
     if out_path.exists():
         stored = json.loads(out_path.read_text())
         return [Peptide(**row) for row in stored["peptides"]], stored["dropped"]
@@ -186,6 +234,7 @@ def build(out_path: Path, *, limit: int = 400) -> tuple[list[Peptide], dict[str,
         json.dumps(
             {
                 "source": "RCSB PDB: protein entities < 3.5 kDa in structures with >1 protein entity",
+                "released_on_or_before": SNAPSHOT_RELEASE_DATE,
                 "requested": limit,
                 "kept": len(peptides),
                 "dropped": dropped,
