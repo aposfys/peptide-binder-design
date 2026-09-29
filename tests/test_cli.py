@@ -12,7 +12,7 @@ from pepdesign.cli import GPU_GATED, build_parser, main
 @pytest.mark.parametrize("command", sorted(GPU_GATED))
 def test_gpu_gated_commands_say_why(command):
     with pytest.raises(SystemExit) as excinfo:
-        main([command, "--target", "X"] if command != "controls" else [command])
+        main([command, "--target", "X"])
     message = str(excinfo.value)
     assert "GPU" in message
     assert "analysis" in message

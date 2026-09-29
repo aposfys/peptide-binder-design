@@ -46,7 +46,6 @@ def roc_auc(positive: Sequence[float], negative: Sequence[float]) -> float:
     if not positive or not negative:
         raise ValueError("need both populations to compute an AUC")
     combined = sorted([(value, 1) for value in positive] + [(value, 0) for value in negative])
-    ranks: dict[int, float] = {}
     index = 0
     rank_sum_positive = 0.0
     while index < len(combined):
@@ -58,7 +57,6 @@ def roc_auc(positive: Sequence[float], negative: Sequence[float]) -> float:
             if combined[position][1] == 1:
                 rank_sum_positive += average_rank
         index = stop + 1
-    del ranks
     n_pos, n_neg = len(positive), len(negative)
     return (rank_sum_positive - n_pos * (n_pos + 1) / 2) / (n_pos * n_neg)
 
